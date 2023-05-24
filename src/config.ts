@@ -7,7 +7,7 @@ interface Configuration {
       socketEndpoint: 'http://localhost:8080',
     },
     production: {
-      socketEndpoint: 'https://example.com',
+      socketEndpoint: 'https://aspiring-lightning-cloche.glitch.me/',
     },
   };
   
