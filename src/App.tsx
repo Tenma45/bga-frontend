@@ -1,14 +1,26 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { io } from 'socket.io-client';
-import config from './config.ts';
+import { Socket } from 'socket.io-client';
+import { getSocket } from './socket.ts';
+import { Message } from './interface/message.interface.ts'
 
 function App() {
   const [count, setCount] = useState(0)
-  const socketEndpoint = config.socketEndpoint;
-  const socket = io(socketEndpoint);
+  const [socket] = useState<Socket>(getSocket());
+
+  useEffect(() => {
+    socket.on('connect', () => {
+      console.log('Socket connected','Your id is',socket.id);
+    });
+    socket.on('message', (data:Message) => {
+      console.log(data.id,":",data.message);
+    });
+    return () => {
+      socket.off('message');
+    }
+  }, []);
 
   return (
     <>
@@ -26,8 +38,8 @@ function App() {
           count is {count}
         </button>
         <button onClick={() => {
-          console.log("Message")
-          socket.emit("message",{data:"Hello"})
+          console.log("You say Hello!")
+          socket.emit("message",{message:"Hello!"})
           }}>
           Hello
         </button>
