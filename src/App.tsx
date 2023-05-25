@@ -7,7 +7,6 @@ import { getSocket } from './socket.ts';
 import { Message } from './interface/message.interface.ts'
 
 function App() {
-  const [count, setCount] = useState(0)
   const [socket] = useState<Socket>(getSocket());
 
   useEffect(() => {
@@ -34,9 +33,6 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
         <button onClick={() => {
           console.log("You say Hello!")
           socket.emit("message",{message:"Hello!"})
