@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Socket } from 'socket.io-client';
 import { getSocket } from './socket.ts';
-import { Message } from './interface/message.interface.ts'
+import { Message } from './models/message.model.ts'
 
 function App() {
   const [socket] = useState<Socket>(getSocket());
