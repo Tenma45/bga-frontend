@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
+import React, { useState, useEffect } from 'react'
+import reactLogo from '@/assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Socket } from 'socket.io-client';
-import { getSocket } from './socket.ts';
-import { Message } from './models/message.model.ts'
+import { getSocket } from '@/socket';
+import { Message } from '@/models/message.model'
 
 function App() {
   const [socket] = useState<Socket>(getSocket());
 
   useEffect(() => {
     socket.on('connect', () => {
+      const rootDir = process.cwd();
+      console.log('Root directory:', rootDir);
       console.log('Socket connected','Your id is',socket.id);
     });
     socket.on('message', (data:Message) => {

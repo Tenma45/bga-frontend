@@ -1,7 +1,7 @@
 // socket.ts
 
 import { io, Socket } from 'socket.io-client';
-import config from './config.ts';
+import config from '@/config';
 
 let socket: Socket;
 
